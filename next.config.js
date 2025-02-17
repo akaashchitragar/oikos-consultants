@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  output: 'export',
   images: {
     unoptimized: true, // For Amplify deployment
     remotePatterns: [
@@ -17,6 +17,10 @@ const nextConfig = {
   generateEtags: false,
   poweredByHeader: false,
   compress: false,
+  // Add Google Maps to the list of external scripts
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig; 

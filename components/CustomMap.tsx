@@ -65,14 +65,6 @@ export default function CustomMap({ location }: CustomMapProps) {
       >
         <Marker
           position={location}
-          icon={{
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 10,
-            fillColor: '#2E7D32',
-            fillOpacity: 1,
-            strokeColor: '#FFFFFF',
-            strokeWeight: 2,
-          }}
         />
       </GoogleMap>
     </LoadScript>
