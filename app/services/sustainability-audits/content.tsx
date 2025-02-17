@@ -17,7 +17,6 @@ import {
   PieChart,
   Workflow,
   Activity,
-  ChartBar,
   Database,
   Presentation,
   CheckCircle,
@@ -207,7 +206,7 @@ export default function SustainabilityAuditsContent() {
                   {[
                     {
                       text: "Enhanced ESG Performance",
-                      icon: <ChartBar className="h-5 w-5 text-emerald-600 mt-1 mr-3 flex-shrink-0 transition-transform duration-300 hover:rotate-12" />
+                      icon: <BarChart3 className="h-5 w-5 text-emerald-600 mt-1 mr-3 flex-shrink-0 transition-transform duration-300 hover:rotate-12" />
                     },
                     {
                       text: "Regulatory Compliance",
@@ -245,7 +244,7 @@ export default function SustainabilityAuditsContent() {
           {/* Large Decorative Elements */}
           <div className="absolute inset-0 opacity-[0.07]">
             <Globe className="absolute -top-12 -left-12 w-96 h-96 text-[#A8C6A1] transform rotate-12" />
-            <ChartBar className="absolute -bottom-12 -right-12 w-96 h-96 text-[#A8C6A1] transform -rotate-12" />
+            <BarChart3 className="absolute -bottom-12 -right-12 w-96 h-96 text-[#A8C6A1] transform -rotate-12" />
           </div>
 
           {/* Floating Elements - Left Side */}
@@ -266,7 +265,7 @@ export default function SustainabilityAuditsContent() {
 
           {/* Floating Elements - Right Side */}
           <div className="absolute right-0 inset-y-0 w-1/3">
-            <ChartBar className="absolute top-20 right-16 w-10 h-10 text-white opacity-20 animate-float-slow" />
+            <BarChart3 className="absolute top-20 right-16 w-10 h-10 text-white opacity-20 animate-float-slow" />
             <LineChart className="absolute top-1/3 right-20 w-8 h-8 text-white opacity-15 animate-float-slow delay-150" />
             <FileText className="absolute bottom-1/3 right-24 w-12 h-12 text-white opacity-20 animate-float-slow delay-300" />
             <PieChart className="absolute bottom-20 right-16 w-8 h-8 text-white opacity-15 animate-float-slow delay-450" />
