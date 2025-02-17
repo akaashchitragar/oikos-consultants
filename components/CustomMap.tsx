@@ -32,7 +32,7 @@ const loadGoogleMapsApi = (): Promise<void> => {
 
     isLoading = true
     const script = document.createElement('script')
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&loading=async&libraries=marker`
     script.async = true
     script.defer = true
     
@@ -217,72 +217,94 @@ export default function CustomMap({ location }: CustomMapProps) {
         // Create or update map instance
         if (!mapInstanceRef.current) {
           mapInstanceRef.current = new google.maps.Map(mapRef.current, mapOptions)
-
-          // Add a custom overlay for a subtle vignette effect
-          const overlay = new google.maps.OverlayView()
-          overlay.draw = function() {}
-          overlay.setMap(mapInstanceRef.current)
         } else {
           mapInstanceRef.current.setCenter(location)
         }
 
-        // Create or update marker
-        if (!markerRef.current) {
-          markerRef.current = new google.maps.Marker({
-            position: location,
-            map: mapInstanceRef.current,
-            title: 'Oikos Consultants',
-            animation: google.maps.Animation.DROP,
-            optimized: false, // Ensures smooth animation
-            icon: {
-              url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="42" viewBox="0 0 384 512">
-                  <defs>
-                    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
-                    </filter>
-                    <radialGradient id="circle-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                      <stop offset="0%" style="stop-color:#FFFFFF"/>
-                      <stop offset="100%" style="stop-color:#F5F5F5"/>
-                    </radialGradient>
-                  </defs>
-                  <path fill="#1B5E20" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0z" filter="url(#shadow)"/>
-                  <circle cx="192" cy="192" r="65" fill="url(#circle-gradient)"/>
-                </svg>
-              `)}`,
-              scaledSize: new google.maps.Size(36, 48),
-              anchor: new google.maps.Point(18, 48),
-              labelOrigin: new google.maps.Point(18, -16)
-            },
-            label: {
-              text: 'Oikos Consultants',
-              color: '#1B5E20',
-              fontWeight: 'bold',
-              fontSize: '15px',
-              className: 'map-label'
-            }
-          })
+        // Create marker with custom pin and label
+        const marker = new google.maps.Marker({
+          position: location,
+          map: mapInstanceRef.current,
+          animation: google.maps.Animation.DROP,
+          title: 'Oikos Consultants',
+          icon: {
+            url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 384 512">
+                <defs>
+                  <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feOffset result="offOut" in="SourceAlpha" dx="0" dy="2" />
+                    <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3" />
+                    <feComponentTransfer>
+                      <feFuncA type="linear" slope="0.3"/>
+                    </feComponentTransfer>
+                    <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                  </filter>
+                  <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#2E7D32;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#1B5E20;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+                <path fill="url(#grad)" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" filter="url(#shadow)"/>
+                <circle cx="192" cy="192" r="48" fill="white"/>
+              </svg>
+            `)}`,
+            scaledSize: new google.maps.Size(32, 32),
+            anchor: new google.maps.Point(16, 32),
+            labelOrigin: new google.maps.Point(16, -8)
+          },
+          label: {
+            text: 'Oikos Consultants',
+            className: 'map-marker-label',
+            color: '#1B5E20',
+            fontWeight: '600',
+            fontSize: '13px'
+          }
+        })
 
-          // Add hover effect to marker
-          markerRef.current.addListener('mouseover', () => {
-            if (markerRef.current) {
-              markerRef.current.setAnimation(google.maps.Animation.BOUNCE)
-              setTimeout(() => {
-                if (markerRef.current) {
-                  markerRef.current.setAnimation(null)
-                }
-              }, 750)
-            }
-          })
-        } else {
-          markerRef.current.setPosition(location)
-        }
+        // Create info window with enhanced styling
+        const infoWindow = new google.maps.InfoWindow({
+          content: `
+            <div style="padding: 12px; min-width: 200px;">
+              <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <div style="width: 24px; height: 24px; margin-right: 8px;">
+                  <svg viewBox="0 0 384 512" style="width: 100%; height: 100%; fill: #2E7D32;">
+                    <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+                  </svg>
+                </div>
+                <h3 style="margin: 0; color: #2E7D32; font-weight: bold; font-size: 16px;">Oikos Consultants</h3>
+              </div>
+              <p style="margin: 0; color: #333; line-height: 1.4;">
+                #27, Nehru Nagar, Gokul Road,<br>
+                Hubballi, Karnataka 580030
+              </p>
+            </div>
+          `,
+          pixelOffset: new google.maps.Size(0, -20)
+        })
 
-        // Create or update info window
-        if (!infoWindowRef.current) {
-          // Remove info window as we're showing the label directly
-          infoWindowRef.current = null
-        }
+        // Show info window on marker click
+        marker.addListener('click', () => {
+          infoWindow.open(mapInstanceRef.current, marker)
+        })
+
+        // Store references
+        markerRef.current = marker
+        infoWindowRef.current = infoWindow
+
+        // Add custom styles for the marker label
+        const style = document.createElement('style')
+        style.textContent = `
+          .map-marker-label {
+            text-shadow: 1px 1px 2px rgba(255,255,255,1), 
+                        -1px -1px 2px rgba(255,255,255,1), 
+                        -1px 1px 2px rgba(255,255,255,1), 
+                        1px -1px 2px rgba(255,255,255,1);
+            white-space: nowrap;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+          }
+        `
+        document.head.appendChild(style)
+
       } catch (error) {
         console.error('Error loading Google Maps:', error)
       }
@@ -290,7 +312,6 @@ export default function CustomMap({ location }: CustomMapProps) {
 
     initMap()
 
-    // Cleanup function
     return () => {
       if (infoWindowRef.current) {
         infoWindowRef.current.close()

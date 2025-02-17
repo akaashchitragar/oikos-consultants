@@ -4,7 +4,11 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react'
+import { 
+  Mail, Phone, MapPin, Clock, Send,
+  Leaf, TreePine, Wind, Flower2, Globe,
+  Recycle, Sprout, Cloud, Droplets, Sun
+} from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
@@ -129,41 +133,63 @@ export default function ContactPage() {
 
         {/* Contact Information Cards */}
         <section 
-          className="w-full relative bg-[#F3F8F1] -mt-10 z-10"
+          className="w-full relative bg-gradient-to-br from-green-100 via-green-50/80 to-transparent -mt-10 z-10 overflow-hidden"
           role="region" 
           aria-labelledby="contact-section-title"
         >
-          <div className="absolute inset-x-0 top-0 h-32 bg-[#F3F8F1]" style={{ clipPath: 'ellipse(75% 100% at 50% 0%)' }} />
-          {/* Enhanced layered background patterns */}
-          <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-[0.1]" />
-          <div className="absolute inset-0 bg-[radial-gradient(#1B5E20_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.1]" />
-          <div className="absolute inset-0 bg-[linear-gradient(45deg,#1B5E20_0.5px,transparent_0.5px)] [background-size:24px_24px] opacity-[0.08]" />
+          <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-[0.06]" />
+          <div className="absolute inset-0 bg-[radial-gradient(#3b8249_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.06]" />
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,#3b8249_0.5px,transparent_0.5px)] [background-size:24px_24px] opacity-[0.04]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/20 to-white/90" />
+
+          {/* Existing background patterns with reduced opacity */}
+          <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-[0.1] dark:opacity-[0.05]" />
+          <div className="absolute inset-0 bg-[radial-gradient(#1B5E20_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.08]" />
+          <div className="absolute inset-0 bg-[linear-gradient(45deg,#1B5E20_0.5px,transparent_0.5px)] [background-size:24px_24px] opacity-[0.06]" />
           <div className="absolute inset-0 bg-[radial-gradient(#2E7D32_2px,transparent_2px)] [background-size:40px_40px] opacity-[0.06]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#F3F8F1]/50 via-[#F3F8F1] to-[#F3F8F1]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-100/50 via-gray-100 to-gray-100" />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative pt-24 pb-20">
             <div className="text-center mb-20">
-              <motion.h1
-                id="main-heading"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
-                tabIndex={0}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1B5E20] bg-opacity-10 mb-6 border border-[#4ADE80]/20 shadow-sm hover:shadow-md hover:bg-[#1B5E20]/20 hover:border-[#4ADE80]/30 transition-all duration-300 group cursor-default"
               >
-                Get in Touch
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
-                tabIndex={0}
-              >
-                We&apos;re here to help with your environmental consulting needs. Reach out to us through any of the following channels.
-              </motion.p>
+                <motion.div
+                  whileHover={{ rotate: 180 }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#2E7D32] transition-transform duration-300 group-hover:scale-110" />
+                </motion.div>
+                <span className="text-[#2E7D32] text-sm font-medium group-hover:translate-x-0.5 transition-all duration-300">Contact Us</span>
+              </motion.div>
+
+              <div className="space-y-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="relative"
+                >
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1A1C1B] tracking-tight leading-[1.1]">
+                    Get in <span className="relative inline-block text-[#2E7D32]">
+                      <span className="relative z-10 px-2">Touch</span>
+                      <div className="absolute -inset-x-3 -inset-y-2 bg-[#2E7D32]/10 rounded-2xl transform -rotate-1"></div>
+                    </span>
+                  </h1>
+                </motion.div>
+
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                  className="text-lg md:text-xl text-[#2C302E]/80 max-w-2xl mx-auto leading-relaxed font-light mt-6"
+                >
+                  We&apos;re here to help with your environmental consulting needs. Reach out to us through any of the following channels.
+                </motion.p>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20" role="list">
@@ -175,18 +201,38 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="relative group"
+                className="relative group h-full"
                 tabIndex={0}
               >
-                <div className="relative bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#E8F5E9] mb-6" aria-hidden="true">
-                    <MapPin className="w-8 h-8 text-[#2E7D32]" />
+                <div className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-green-100 hover:border-green-200 overflow-hidden h-full">
+                  {/* Enhanced Background Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-white opacity-50" />
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-200 to-green-100" />
+                  
+                  <div className="relative z-10">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] p-4 rounded-2xl shadow-lg mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <MapPin className="w-8 h-8 text-[#2E7D32]" />
+                      </div>
+                      <h3 id="visit-title" className="text-xl font-bold text-gray-900 mb-3">Visit Us</h3>
+                      <address className="text-gray-600 not-italic text-base leading-relaxed mb-6">
+                        #27, Nehru Nagar, Gokul Road,<br />
+                        Hubballi, Karnataka 580030
+                      </address>
+                      
+                      <a 
+                        href="https://maps.google.com/?q=15.352333,75.098639" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="inline-flex items-center px-4 py-2 bg-[#2E7D32] text-white rounded-full text-sm font-medium hover:bg-[#1B5E20] transition-colors duration-300 group/link shadow-md hover:shadow-lg"
+                      >
+                        Get Directions
+                        <svg className="w-4 h-4 ml-2 transform transition-transform group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
-                  <h3 id="visit-title" className="text-xl font-semibold mb-4">Visit Us</h3>
-                  <address className="text-gray-600 dark:text-gray-300 not-italic">
-                    #27, Nehru Nagar, Gokul Road,<br />
-                    Hubballi, Karnataka 580030
-                  </address>
                 </div>
               </motion.div>
 
@@ -198,21 +244,38 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="relative group"
+                className="relative group h-full"
                 tabIndex={0}
               >
-                <div className="relative bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#E8F5E9] mb-6" aria-hidden="true">
-                    <Mail className="w-8 h-8 text-[#2E7D32]" />
+                <div className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-green-100 hover:border-green-200 overflow-hidden h-full">
+                  {/* Enhanced Background Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-white opacity-50" />
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-200 to-green-100" />
+                  
+                  <div className="relative z-10">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] p-4 rounded-2xl shadow-lg mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <Mail className="w-8 h-8 text-[#2E7D32]" />
+                      </div>
+                      <h3 id="email-title" className="text-xl font-bold text-gray-900 mb-3">Email Us</h3>
+                      <a 
+                        href="mailto:info@oikosconsultants.com"
+                        className="text-gray-600 text-base hover:text-[#2E7D32] transition-colors duration-300 mb-6"
+                      >
+                        info@oikosconsultants.com
+                      </a>
+                      
+                      <a 
+                        href="mailto:info@oikosconsultants.com" 
+                        className="inline-flex items-center px-4 py-2 bg-[#2E7D32] text-white rounded-full text-sm font-medium hover:bg-[#1B5E20] transition-colors duration-300 group/link shadow-md hover:shadow-lg"
+                      >
+                        Send Email
+                        <svg className="w-4 h-4 ml-2 transform transition-transform group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
-                  <h3 id="email-title" className="text-xl font-semibold mb-4">Email Us</h3>
-                  <a 
-                    href="mailto:info@oikosconsultants.com" 
-                    className="text-[#2E7D32] hover:text-[#1B5E20] transition-colors duration-300 font-medium focus:outline-none focus:ring-2 focus:ring-[#2E7D32] focus:ring-offset-2 rounded-sm"
-                    aria-label="Send email to info@oikosconsultants.com"
-                  >
-                    info@oikosconsultants.com
-                  </a>
                 </div>
               </motion.div>
 
@@ -224,21 +287,38 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="relative group"
+                className="relative group h-full"
                 tabIndex={0}
               >
-                <div className="relative bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-[#E8F5E9] mb-6" aria-hidden="true">
-                    <Phone className="w-8 h-8 text-[#2E7D32]" />
+                <div className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-green-100 hover:border-green-200 overflow-hidden h-full">
+                  {/* Enhanced Background Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-white opacity-50" />
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-200 to-green-100" />
+                  
+                  <div className="relative z-10">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] p-4 rounded-2xl shadow-lg mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <Phone className="w-8 h-8 text-[#2E7D32]" />
+                      </div>
+                      <h3 id="call-title" className="text-xl font-bold text-gray-900 mb-3">Call Us</h3>
+                      <a 
+                        href="tel:+919049006216"
+                        className="text-gray-600 text-base hover:text-[#2E7D32] transition-colors duration-300 mb-6"
+                      >
+                        +91 90490 06216
+                      </a>
+                      
+                      <a 
+                        href="tel:+919049006216" 
+                        className="inline-flex items-center px-4 py-2 bg-[#2E7D32] text-white rounded-full text-sm font-medium hover:bg-[#1B5E20] transition-colors duration-300 group/link shadow-md hover:shadow-lg"
+                      >
+                        Call Now
+                        <svg className="w-4 h-4 ml-2 transform transition-transform group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
-                  <h3 id="call-title" className="text-xl font-semibold mb-4">Call Us</h3>
-                  <a 
-                    href="tel:+919049006216" 
-                    className="text-[#2E7D32] hover:text-[#1B5E20] transition-colors duration-300 font-medium focus:outline-none focus:ring-2 focus:ring-[#2E7D32] focus:ring-offset-2 rounded-sm"
-                    aria-label="Call us at +91 90490 06216"
-                  >
-                    +91 90490 06216
-                  </a>
                 </div>
               </motion.div>
             </div>
