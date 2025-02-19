@@ -15,6 +15,11 @@ Oikos Consultants specializes in environmental consulting and sustainability ser
 - Greenhouse Gas (GHG) Inventorisation
 - Ecological Restoration Projects
 - Promotion of Native Species
+- Environmental Impact Assessment (EIA)
+- Corporate ESG Strategy Development
+- Sustainable Supply Chain Management
+- Carbon Footprint Analysis
+- Environmental Training & Workshops
 
 ## Tech Stack
 
@@ -22,6 +27,14 @@ Oikos Consultants specializes in environmental consulting and sustainability ser
 - Tailwind CSS
 - shadcn/ui
 - react-calendly
+- Framer Motion
+- React Hook Form
+- Zod Validation
+- React Query
+- NextAuth.js
+- Prisma ORM
+- PostgreSQL
+- SendGrid Email Integration
 
 ## Color Theme
 
@@ -95,16 +108,34 @@ Oikos/
 │   ├── about/page.tsx           # About page
 │   ├── services/page.tsx        # Services page
 │   ├── contact/page.tsx         # Contact page
-│   └── book/page.tsx            # Calendly booking page
+│   ├── book/page.tsx            # Calendly booking page
+│   ├── blog/                    # Blog section
+│   ├── case-studies/            # Case studies
+│   ├── team/                    # Team profiles
+│   └── admin/                   # Admin dashboard
 ├── components/
 │   ├── ui/                      # shadcn/ui components
+│   ├── layout/                  # Layout components
+│   ├── features/                # Feature components
+│   ├── forms/                   # Form components
+│   ├── blog/                    # Blog components
+│   ├── animations/              # Framer motion animations
 │   ├── Navbar.tsx
 │   ├── Footer.tsx
 │   └── BookingWidget.tsx
+├── lib/
+│   ├── utils/                   # Utility functions
+│   ├── hooks/                   # Custom hooks
+│   ├── api/                     # API handlers
+│   └── db/                      # Database utilities
 ├── public/
-│   └── images/
-└── styles/
-    └── globals.css
+│   ├── images/
+│   ├── icons/
+│   └── locales/                 # Translation files
+├── styles/
+│   └── globals.css
+└── prisma/
+    └── schema.prisma
 ```
 
 ## Development
@@ -128,31 +159,82 @@ Build the project:
 npm run build
 ```
 
-Deploy to your CentOS server:
+Deploy using AWS Amplify:
 
-```bash
-# Copy build files to server
-scp -r .next/* user@205.147.111.116:/var/www/oikosconsultants/
-
-# Restart Nginx
-sudo systemctl restart nginx
-```
+The project is automatically deployed through AWS Amplify's CI/CD pipeline when changes are pushed to the main branch of the GitHub repository.
 
 ## Server Configuration
 
-- CentOS v7.9.2009 STANDARD
-- Domain: oikosconsultants.com
-- IP: 205.147.111.116
+- Platform: AWS Amplify (WEB_COMPUTE)
+- Framework: Next.js - SSR
+- Production Branch URL: https://main.d1pk497nv3d4i.amplifyapp.com
+- App ARN: arn:aws:amplify:ap-south-1:490004656774:apps/d1pk497nv3d4i
+- Repository: https://github.com/chitragarakaash/oikos-consultants.git
+- Branch: main
+- Created: 17/02/2025, 21:05:46
+- Last Updated: 18/02/2025, 01:02:21
+
+### Build Settings
+
+```yaml
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+```
+
+### Environment Variables
+
+Configure these in AWS Amplify Console:
+
+```text
+NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/oikosconsultants/30min
+DATABASE_URL=your_postgresql_url
+NEXTAUTH_SECRET=your_auth_secret
+NEXTAUTH_URL=https://main.d1pk497nv3d4i.amplifyapp.com
+SENDGRID_API_KEY=your_sendgrid_key
+NEXT_PUBLIC_GA_ID=your_google_analytics_id
+```
 
 ## Features
 
 - Modern, responsive design
-- SEO optimized
+- SEO optimized with Next.js metadata API
 - Fast page loads with static generation
+- Dynamic server-side rendering where needed
 - Calendly integration for consultation booking
-- Service showcase
-- Contact forms
+- Interactive service showcase with animations
+- Secure contact forms with validation
 - Mobile-friendly interface
+- Blog section with MDX support
+- Case studies portfolio
+- Team member profiles
+- Newsletter subscription
+- Social media integration
+- Testimonials carousel
+- Image optimization with Next/Image
+- Progressive Web App (PWA) capabilities
+- Multi-language support
+- Dark mode toggle
+- Loading states and skeleton screens
+- Rich text editor for admin content
+- Analytics integration
+- Automated email responses
+- SSL encryption
+- Sitemap generation
+- RSS feed
 
 ## Environment Variables
 
@@ -160,6 +242,11 @@ Create a `.env.local` file in the root directory:
 
 ```text
 NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/oikosconsultants/30min
+DATABASE_URL=your_postgresql_url
+NEXTAUTH_SECRET=your_auth_secret
+NEXTAUTH_URL=http://localhost:3000
+SENDGRID_API_KEY=your_sendgrid_key
+NEXT_PUBLIC_GA_ID=your_google_analytics_id
 ```
 
 ## Contributing
