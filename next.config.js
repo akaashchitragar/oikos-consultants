@@ -17,7 +17,6 @@ const nextConfig = {
   generateEtags: false,
   poweredByHeader: false,
   compress: false,
-  // Add Google Maps to the list of external scripts
   compiler: {
     styledComponents: true,
   },

@@ -6,25 +6,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { 
   Mail, Phone, MapPin, Clock, Send,
-  Leaf, TreePine, Wind, Flower2, Globe,
-  Recycle, Sprout, Cloud, Droplets, Sun
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
 import CalendlyEmbed from '@/components/CalendlyEmbed'
-import dynamic from 'next/dynamic'
 import Script from 'next/script'
-
-// Dynamically import the CustomMap component with no SSR
-const DynamicMap = dynamic(() => import('@/components/CustomMap'), {
-  ssr: false,
-  loading: () => (
-    <div className="h-[400px] bg-gray-100 animate-pulse flex items-center justify-center">
-      <p className="text-gray-500">Loading map...</p>
-    </div>
-  ),
-})
 
 // Add Schema.org JSON-LD
 const jsonLd = {
@@ -134,16 +121,9 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="flex min-h-screen flex-col items-center pt-[70px]" role="main" aria-labelledby="main-heading">
-        {/* Google Maps Section */}
-        <div className="w-full relative z-20">
-          <div className="h-[400px] shadow-lg" role="region" aria-label="Office location on map">
-            <DynamicMap location={{ lat: 15.352333, lng: 75.098639 }} />
-          </div>
-        </div>
-
         {/* Contact Information Cards */}
         <section 
-          className="w-full relative bg-gradient-to-br from-green-100 via-green-50/80 to-transparent -mt-10 z-10 overflow-hidden"
+          className="w-full relative bg-gradient-to-br from-green-100 via-green-50/80 to-transparent z-10 overflow-hidden"
           role="region" 
           aria-labelledby="contact-section-title"
         >
