@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const navLinks = [
+  { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
   { 
     href: '/services', 
