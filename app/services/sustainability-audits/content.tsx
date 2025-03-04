@@ -60,12 +60,6 @@ export default function SustainabilityAuditsContent() {
             <p className="text-xl text-gray-200 mb-6">
               Comprehensive evaluation and optimization of organizational sustainability practices for improved performance and compliance
             </p>
-            <Button
-              size="lg"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            >
-              Schedule Consultation
-            </Button>
           </motion.div>
         </div>
       </section>
@@ -234,65 +228,6 @@ export default function SustainabilityAuditsContent() {
               </motion.div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative py-24 bg-gradient-to-br from-[#2E7D32] to-[#1B5E20] text-white overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          {/* Large Decorative Elements */}
-          <div className="absolute inset-0 opacity-[0.07]">
-            <Globe className="absolute -top-12 -left-12 w-96 h-96 text-[#A8C6A1] transform rotate-12" />
-            <BarChart3 className="absolute -bottom-12 -right-12 w-96 h-96 text-[#A8C6A1] transform -rotate-12" />
-          </div>
-
-          {/* Floating Elements - Left Side */}
-          <div className="absolute left-0 inset-y-0 w-1/3">
-            <Leaf className="absolute top-12 left-12 w-8 h-8 text-white opacity-20 animate-float-slow" />
-            <PieChart className="absolute top-1/4 left-24 w-12 h-12 text-white opacity-15 animate-float-slow delay-200" />
-            <Lightbulb className="absolute top-1/2 left-16 w-10 h-10 text-white opacity-20 animate-float-slow delay-300 transform rotate-45" />
-            <Database className="absolute bottom-1/4 left-20 w-6 h-6 text-white opacity-15 animate-float-slow delay-400" />
-          </div>
-
-          {/* Floating Elements - Center */}
-          <div className="absolute left-1/3 right-1/3 inset-y-0">
-            <BarChart3 className="absolute top-16 left-1/2 w-10 h-10 text-white opacity-20 animate-float-medium transform -translate-x-1/2" />
-            <Recycle className="absolute top-1/3 left-1/4 w-8 h-8 text-white opacity-15 animate-float-medium delay-150" />
-            <Globe className="absolute bottom-1/3 right-1/4 w-12 h-12 text-white opacity-20 animate-float-medium delay-300" />
-            <Activity className="absolute bottom-24 left-1/2 w-8 h-8 text-white opacity-15 animate-float-medium delay-450 transform -translate-x-1/2 rotate-12" />
-          </div>
-
-          {/* Floating Elements - Right Side */}
-          <div className="absolute right-0 inset-y-0 w-1/3">
-            <BarChart3 className="absolute top-20 right-16 w-10 h-10 text-white opacity-20 animate-float-slow" />
-            <LineChart className="absolute top-1/3 right-20 w-8 h-8 text-white opacity-15 animate-float-slow delay-150" />
-            <FileText className="absolute bottom-1/3 right-24 w-12 h-12 text-white opacity-20 animate-float-slow delay-300" />
-            <PieChart className="absolute bottom-20 right-16 w-8 h-8 text-white opacity-15 animate-float-slow delay-450" />
-          </div>
-        </div>
-
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-2xl mx-auto"
-          >
-            <h2 className="text-3xl font-bold mb-4">
-              Ready to Enhance Your Sustainability?
-            </h2>
-            <p className="text-gray-200 mb-8">
-              Let&apos;s work together to improve your organization&apos;s sustainability performance. Schedule a consultation to discuss your audit needs.
-            </p>
-            <Button
-              size="lg"
-              className="bg-white text-emerald-900 hover:bg-gray-100 transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            >
-              Get Started Today
-            </Button>
-          </motion.div>
         </div>
       </section>
 

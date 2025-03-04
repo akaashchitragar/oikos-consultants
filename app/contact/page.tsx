@@ -10,7 +10,6 @@ import {
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useToast } from '@/components/ui/use-toast'
-import CalendlyEmbed from '@/components/CalendlyEmbed'
 import Script from 'next/script'
 
 // Add Schema.org JSON-LD
@@ -46,21 +45,6 @@ const jsonLd = {
     'https://www.linkedin.com/company/oikos-consultants',
     'https://twitter.com/oikosconsultants'
   ],
-  potentialAction: {
-    '@type': 'ScheduleAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://calendly.com/oikos-consultants',
-      actionPlatform: [
-        'http://schema.org/DesktopWebPlatform',
-        'http://schema.org/MobileWebPlatform'
-      ]
-    },
-    result: {
-      '@type': 'Schedule',
-      scheduleTimezone: 'Asia/Kolkata'
-    }
-  },
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
@@ -313,7 +297,7 @@ export default function ContactPage() {
               </motion.div>
             </div>
 
-            {/* Contact Form and Calendly Section */}
+            {/* Contact Form and Business Hours Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Contact Form */}
               <motion.div
@@ -463,24 +447,6 @@ export default function ContactPage() {
                           </p>
                         </div>
                       </motion.div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              {/* Calendly Widget */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              >
-                <Card className="bg-white dark:bg-gray-800 shadow-xl overflow-hidden h-full">
-                  <div className="h-2 bg-gradient-to-r from-[#66BB6A] to-[#1B5E20]" aria-hidden="true" />
-                  <CardContent className="p-8">
-                    <h2 id="schedule-title" className="text-2xl font-semibold mb-6">Schedule a Meeting</h2>
-                    <div role="complementary" aria-labelledby="schedule-title">
-                      <CalendlyEmbed />
                     </div>
                   </CardContent>
                 </Card>
