@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Leaf, Globe, Sprout, Brain, TreePine, Flower2, Wind, Droplets, Sun, Trees } from 'lucide-react'
+import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
+import { ArrowRight, ArrowLeft, Leaf, Globe, Sprout, Brain, TreePine, Flower2, Wind, Droplets, Sun, Trees } from 'lucide-react'
 import TrustedOrganizations from '@/components/TrustedOrganizations'
 import Testimonials from '@/components/Testimonials'
 import ServicesSection from '@/components/ServicesSection'
@@ -16,19 +16,29 @@ const headingVariants = [
     line1: "Sustainable Solutions",
     line2: "for a",
     line3: "Better Tomorrow",
-    subheading: "Leading environmental consulting firm specializing in sustainability solutions, biodiversity conservation, and ecological services."
+    subheading: "Leading environmental consulting firm specializing in sustainability solutions, biodiversity conservation, and ecological services.",
+    imageSrc: "/images/hero-sustainable-solutions.jpg"
   },
   {
     line1: "Environmental",
     line2: "Innovation for",
     line3: "Future Growth",
-    subheading: "Pioneering sustainable practices and innovative solutions for businesses committed to environmental stewardship."
+    subheading: "Pioneering sustainable practices and innovative solutions for businesses committed to environmental stewardship.",
+    imageSrc: "/images/hero-environmental-innovation.jpg"
   },
   {
     line1: "Conservation",
     line2: "Strategies for",
     line3: "Global Impact",
-    subheading: "Empowering organizations with expert guidance in biodiversity preservation and ecological restoration."
+    subheading: "Empowering organizations with expert guidance in biodiversity preservation and ecological restoration.",
+    imageSrc: "/images/hero-conservation-strategies.jpg"
+  },
+  {
+    line1: "Ecological",
+    line2: "Restoration for",
+    line3: "Thriving Ecosystems",
+    subheading: "Revitalizing natural habitats and ecosystems through science-based restoration techniques and sustainable management practices.",
+    imageSrc: "/images/hero-ecological-restoration.jpg"
   }
 ]
 
@@ -39,10 +49,20 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHeading((prev) => (prev + 1) % headingVariants.length)
-    }, 5000) // Changed to 5 seconds for better readability
+    }, 10000) // Changed to 10 seconds for each slide
 
     return () => clearInterval(interval)
   }, [])
+
+  // Function to go to the next slide
+  const nextSlide = () => {
+    setCurrentHeading((prev) => (prev + 1) % headingVariants.length)
+  }
+
+  // Function to go to the previous slide
+  const prevSlide = () => {
+    setCurrentHeading((prev) => (prev - 1 + headingVariants.length) % headingVariants.length)
+  }
 
   // Add this function to handle the smooth infinite scroll
   const handleScroll = () => {
@@ -67,101 +87,269 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/Hero-banner.jpeg"
-            alt="Hero Background"
-            fill
-            className="object-cover"
-            priority
+      <MotionConfig reducedMotion="user">
+        <section className="relative h-screen flex items-center overflow-hidden bg-[#1B5E20]">
+          {/* Background overlay to ensure smooth transitions */}
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-[#1B5E20]/90 via-[#1B5E20]/80 to-[#1B5E20]/70 z-0"
+            animate={{ 
+              background: [
+                "linear-gradient(to right, rgba(27, 94, 32, 0.9), rgba(27, 94, 32, 0.8), rgba(27, 94, 32, 0.7))",
+                "linear-gradient(to right, rgba(27, 94, 32, 0.85), rgba(27, 94, 32, 0.75), rgba(27, 94, 32, 0.65))",
+                "linear-gradient(to right, rgba(27, 94, 32, 0.9), rgba(27, 94, 32, 0.8), rgba(27, 94, 32, 0.7))"
+              ]
+            }}
+            transition={{
+              duration: 8,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+            style={{ willChange: "background" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
-        </div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl ml-0 sm:ml-8 md:ml-12"
-          >
-            <AnimatePresence mode="wait">
+          
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={currentHeading}
+              initial={{ 
+                opacity: 0,
+                clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" 
+              }}
+              animate={{ 
+                opacity: 1,
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" 
+              }}
+              exit={{ 
+                opacity: 0,
+                clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)" 
+              }}
+              transition={{ 
+                type: "spring",
+                stiffness: 100,
+                damping: 20,
+                mass: 1,
+                duration: 0.7
+              }}
+              className="absolute inset-0 z-10"
+            >
               <motion.div
-                key={currentHeading}
+                className="absolute inset-0"
+                animate={{ scale: 1.05 }}
+                initial={{ scale: 1 }}
+                transition={{ 
+                  duration: 10,
+                  ease: "easeInOut",
+                  repeat: 0
+                }}
+              >
+                <Image
+                  src={headingVariants[currentHeading].imageSrc}
+                  alt={`Hero Background ${currentHeading + 1}`}
+                  fill
+                  className="object-cover"
+                  style={{ 
+                    filter: "brightness(0.95) contrast(1.05)",
+                    willChange: "transform"
+                  }}
+                  priority
+                />
+              </motion.div>
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+            </motion.div>
+          </AnimatePresence>
+          
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-20">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-3xl ml-0 sm:ml-8 md:ml-12"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={currentHeading}
+                  initial={{ 
+                    opacity: 0,
+                    y: 10,
+                    filter: "blur(8px)"
+                  }}
+                  animate={{ 
+                    opacity: 1,
+                    y: 0,
+                    filter: "blur(0px)"
+                  }}
+                  exit={{ 
+                    opacity: 0,
+                    y: -10,
+                    filter: "blur(8px)"
+                  }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 20,
+                    mass: 1
+                  }}
+                >
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
+                    <motion.div 
+                      className="flex flex-col gap-2"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ 
+                        type: "spring",
+                        stiffness: 100,
+                        damping: 20,
+                        mass: 1
+                      }}
+                    >
+                      <motion.span
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ 
+                          type: "spring",
+                          stiffness: 100,
+                          damping: 20,
+                          mass: 1,
+                          delay: 0.1
+                        }}
+                        className="text-white"
+                      >
+                        {headingVariants[currentHeading].line1}
+                      </motion.span>
+                      <div className="flex flex-col gap-1">
+                        <motion.span 
+                          className="text-4xl md:text-5xl lg:text-6xl text-[#A8C6A1] font-medium"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ 
+                            type: "spring",
+                            stiffness: 100,
+                            damping: 20,
+                            mass: 1,
+                            delay: 0.2
+                          }}
+                        >
+                          {headingVariants[currentHeading].line2}
+                        </motion.span>
+                        <motion.span 
+                          className="text-5xl md:text-6xl lg:text-7xl text-[#A8C6A1] drop-shadow-lg"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ 
+                            type: "spring",
+                            stiffness: 100,
+                            damping: 20,
+                            mass: 1,
+                            delay: 0.3
+                          }}
+                        >
+                          {headingVariants[currentHeading].line3}
+                        </motion.span>
+                      </div>
+                    </motion.div>
+                  </h1>
+                  <motion.p 
+                    className="text-lg md:text-xl lg:text-2xl mt-6 mb-8 text-neutral-100 max-w-xl font-light leading-relaxed drop-shadow"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 20,
+                      mass: 1,
+                      delay: 0.4
+                    }}
+                  >
+                    {headingVariants[currentHeading].subheading}
+                  </motion.p>
+                </motion.div>
+              </AnimatePresence>
+              
+              {/* Slider Navigation */}
+              <div className="flex items-center space-x-6 mb-8">
+                <div className="flex space-x-3">
+                  {headingVariants.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentHeading(index)}
+                      className={`relative h-1.5 transition-all duration-500 ${
+                        currentHeading === index 
+                          ? 'w-8 bg-white' 
+                          : 'w-4 bg-white/30 hover:bg-white/50'
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    >
+                      {currentHeading === index && (
+                        <motion.span 
+                          layoutId="activeIndicator"
+                          className="absolute inset-0 bg-white shadow-[0_0_8px_rgba(27,94,32,0.6)]"
+                          transition={{ 
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30
+                          }}
+                        />
+                      )}
+                    </button>
+                  ))}
+                </div>
+                
+                <div className="flex space-x-3">
+                  <motion.button 
+                    onClick={prevSlide}
+                    className="w-10 h-10 rounded-full bg-[#1B5E20]/30 backdrop-blur-sm flex items-center justify-center border border-[#1B5E20]/40 hover:border-white/30"
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(27, 94, 32, 0.5)" }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ 
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 25
+                    }}
+                    aria-label="Previous slide"
+                  >
+                    <ArrowLeft className="w-5 h-5 text-white" />
+                  </motion.button>
+                  <motion.button 
+                    onClick={nextSlide}
+                    className="w-10 h-10 rounded-full bg-[#1B5E20]/30 backdrop-blur-sm flex items-center justify-center border border-[#1B5E20]/40 hover:border-white/30"
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(27, 94, 32, 0.5)" }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ 
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 25
+                    }}
+                    aria-label="Next slide"
+                  >
+                    <ArrowRight className="w-5 h-5 text-white" />
+                  </motion.button>
+                </div>
+              </div>
+              
+              <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="flex flex-col sm:flex-row gap-5"
               >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
-                  <motion.div 
-                    className="flex flex-col gap-2"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                  >
-                    <motion.span
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: 0.3 }}
-                      className="text-white"
-                    >
-                      {headingVariants[currentHeading].line1}
-                    </motion.span>
-                    <div className="flex flex-col gap-1">
-                      <motion.span 
-                        className="text-4xl md:text-5xl lg:text-6xl text-[#A8C6A1] font-medium"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                      >
-                        {headingVariants[currentHeading].line2}
-                      </motion.span>
-                      <motion.span 
-                        className="text-5xl md:text-6xl lg:text-7xl text-[#A8C6A1] drop-shadow-lg"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.5 }}
-                      >
-                        {headingVariants[currentHeading].line3}
-                      </motion.span>
-                    </div>
-                  </motion.div>
-                </h1>
-                <motion.p 
-                  className="text-lg md:text-xl lg:text-2xl mt-6 mb-8 text-neutral-100 max-w-xl font-light leading-relaxed drop-shadow"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
+                <Link 
+                  href="/contact"
+                  className="px-8 py-4 bg-[#1B5E20] hover:bg-[#2E7D32] rounded-full text-white font-semibold transition-all flex items-center justify-center gap-2 group w-fit hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  {headingVariants[currentHeading].subheading}
-                </motion.p>
+                  <span className="text-base">Get Started</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link
+                  href="/services"
+                  className="px-8 py-4 bg-white/15 hover:bg-white/25 rounded-full text-white font-semibold backdrop-blur-sm transition-all w-fit hover:scale-105 shadow-lg hover:shadow-xl border border-white/20 hover:border-white/30"
+                >
+                  <span className="text-base">Explore Services</span>
+                </Link>
               </motion.div>
-            </AnimatePresence>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-5"
-            >
-              <Link 
-                href="/contact"
-                className="px-8 py-4 bg-[#1B5E20] hover:bg-[#2E7D32] rounded-full text-white font-semibold transition-all flex items-center justify-center gap-2 group w-fit hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                <span className="text-base">Get Started</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/services"
-                className="px-8 py-4 bg-white/15 hover:bg-white/25 rounded-full text-white font-semibold backdrop-blur-sm transition-all w-fit hover:scale-105 shadow-lg hover:shadow-xl border border-white/20 hover:border-white/30"
-              >
-                <span className="text-base">Explore Services</span>
-              </Link>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
+      </MotionConfig>
 
       {/* Mission Section */}
       <section className="py-24 bg-white relative overflow-hidden">
