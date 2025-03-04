@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'nodejs'
+export const dynamic = 'force-static'
 
 export const alt = 'Oikos Consultants - Environmental Solutions'
 export const size = {
