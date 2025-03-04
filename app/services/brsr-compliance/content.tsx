@@ -1,10 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
-import Link from 'next/link'
 import { 
-  ArrowLeft,
   FileCheck,
   ClipboardList,
   FileText,
@@ -21,43 +18,24 @@ import {
   FileQuestion
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import ServiceHero from '@/components/ServiceHero'
+import ServiceScheduleButton from '@/components/ServiceScheduleButton'
 
 export default function BRSRComplianceContent() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/services/brsr-compliance.jpg"
-            alt="BRSR Compliance and Reporting"
-            fill
-            className="object-cover"
-            priority
+      <ServiceHero 
+        title="BRSR Compliance and Reporting"
+        description="Expert guidance in aligning with SEBI's Business Responsibility and Sustainability Reporting framework"
+        imageSrc="/images/services/brsr-compliance.jpg"
+        actionButton={
+          <ServiceScheduleButton 
+            serviceName="brsr-compliance-and-reporting" 
+            className="mt-6"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <Link href="/services" className="inline-flex items-center text-white hover:text-emerald-400 transition-all duration-300 mb-6 hover:translate-x-[-4px] group">
-            <ArrowLeft className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:transform group-hover:translate-x-[-4px]" />
-            Back to Services
-          </Link>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              BRSR Compliance and Reporting
-            </h1>
-            <p className="text-xl text-gray-200 mb-6">
-              Expert guidance in aligning with SEBI&apos;s Business Responsibility and Sustainability Reporting framework
-            </p>
-          </motion.div>
-        </div>
-      </section>
+        }
+      />
 
       {/* Main Content */}
       <section className="py-16 md:py-24">
@@ -223,6 +201,26 @@ export default function BRSRComplianceContent() {
               </motion.div>
             </div>
           </div>
+          
+          {/* CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-16 text-center"
+          >
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Ready to enhance your BRSR compliance?
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+              Schedule a consultation with our BRSR experts to discuss your organization's specific needs and how we can help you achieve compliance.
+            </p>
+            <ServiceScheduleButton 
+              serviceName="brsr-compliance-and-reporting" 
+              className="mx-auto"
+            />
+          </motion.div>
         </div>
       </section>
 

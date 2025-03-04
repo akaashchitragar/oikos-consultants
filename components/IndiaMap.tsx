@@ -13,7 +13,6 @@ interface ProjectLocation {
   coordinates: [number, number] // [longitude, latitude]
   isOngoing: boolean
   sector?: string
-  description?: string
 }
 
 interface IndiaMapProps {
@@ -25,7 +24,7 @@ const createClusterIcon = (count: number, isOngoing: boolean) => {
   return new DivIcon({
     html: `
       <div class="flex items-center justify-center w-8 h-8 rounded-full ${
-        isOngoing ? 'bg-blue-500' : 'bg-green-500'
+        isOngoing ? 'bg-blue-600' : 'bg-green-700'
       } text-white font-semibold text-sm shadow-lg border-2 border-white">
         ${count}
       </div>
@@ -103,11 +102,6 @@ function ProjectMarkers({ projectLocations, completedIcon, ongoingIcon }: {
                   <h3 className="text-sm font-semibold text-gray-900 mb-2 leading-snug">
                     {project.title}
                   </h3>
-                  {project.description && (
-                    <p className="text-xs text-gray-600 mb-2 leading-snug">
-                      {project.description}
-                    </p>
-                  )}
                   <p className="text-xs text-gray-500 leading-snug">
                     {project.client}
                   </p>
@@ -187,13 +181,14 @@ const STATE_LABEL_STYLE = `
     box-shadow: none;
     font-size: 11px;
     font-weight: 500;
-    color: #1f2937;
+    color: #1e3a29;
     text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
   }
   .project-popup .leaflet-popup-content-wrapper,
   .cluster-popup .leaflet-popup-content-wrapper {
     border-radius: 0.75rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-left: 3px solid #2d6a4f;
   }
   .project-popup .leaflet-popup-content,
   .cluster-popup .leaflet-popup-content {
@@ -221,10 +216,10 @@ function IndiaBorder() {
         // Add border and state labels
         L.geoJSON(data, {
           style: {
-            color: '#475569',
+            color: '#2d6a4f',  // Darker green for borders
             weight: 1.5,
-            fillOpacity: 0.05,
-            fillColor: '#f1f5f9',
+            fillOpacity: 0.08,
+            fillColor: '#b7e4c7',  // Light green fill
             opacity: 0.8,
           },
           onEachFeature: (feature, layer) => {
@@ -283,51 +278,6 @@ function ScrollHandler() {
 }
 
 export default function IndiaMap({ projectLocations }: IndiaMapProps) {
-  const [isScrollEnabled, setIsScrollEnabled] = useState(false)
-  const [showOverlay, setShowOverlay] = useState(false)
-  const overlayTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-
-  // Add event listeners for key press
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.metaKey || e.ctrlKey) {
-        setIsScrollEnabled(true)
-        setShowOverlay(false)
-      }
-    }
-
-    const handleKeyUp = (e: KeyboardEvent) => {
-      if (!e.metaKey && !e.ctrlKey) {
-        setIsScrollEnabled(false)
-      }
-    }
-
-    const handleWheel = (e: WheelEvent) => {
-      if (!isScrollEnabled && e.deltaY !== 0) {
-        setShowOverlay(true)
-        if (overlayTimeoutRef.current) {
-          clearTimeout(overlayTimeoutRef.current)
-        }
-        overlayTimeoutRef.current = setTimeout(() => {
-          setShowOverlay(false)
-        }, 1500)
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    window.addEventListener('keyup', handleKeyUp)
-    window.addEventListener('wheel', handleWheel)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-      window.removeEventListener('keyup', handleKeyUp)
-      window.removeEventListener('wheel', handleWheel)
-      if (overlayTimeoutRef.current) {
-        clearTimeout(overlayTimeoutRef.current)
-      }
-    }
-  }, [isScrollEnabled])
-
   // Create custom icons for completed and ongoing projects
   const completedIcon = new Icon({
     iconUrl: '/map-pin-green.svg',
@@ -345,19 +295,6 @@ export default function IndiaMap({ projectLocations }: IndiaMapProps) {
 
   return (
     <div className="relative w-full h-[700px] bg-white">
-      {/* Scroll Overlay */}
-      <div 
-        className={`absolute inset-0 flex items-center justify-center z-[2000] pointer-events-none transition-opacity duration-300 ${
-          showOverlay ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <div className="bg-black/75 backdrop-blur-sm text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-lg">
-          <span className="text-sm">
-            Use {navigator.platform.includes('Mac') ? '⌘ Command' : 'Ctrl'} + scroll to zoom
-          </span>
-        </div>
-      </div>
-
       <MapContainer
         center={[23.5937, 78.9629]}
         zoom={4.5}
@@ -372,8 +309,8 @@ export default function IndiaMap({ projectLocations }: IndiaMapProps) {
         minZoom={4}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://www.hotosm.org/">Humanitarian OpenStreetMap Team</a>'
+          url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
         <ZoomControl position="bottomright" />
         <IndiaBorder />
@@ -386,24 +323,38 @@ export default function IndiaMap({ projectLocations }: IndiaMapProps) {
       </MapContainer>
 
       {/* Legend */}
-      <div className="absolute top-8 right-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-md p-4 space-y-3 z-[1000]">
+      <div className="absolute top-8 right-8 bg-white/90 backdrop-blur-sm rounded-lg shadow-md p-4 space-y-3 z-[1000] border-l-4 border-green-600">
+        <h4 className="text-sm font-semibold text-green-800 mb-2">Project Locations</h4>
         <div className="flex items-center gap-2">
           <Image src="/map-pin-green.svg" alt="Completed" width={16} height={16} />
-          <span className="text-sm text-gray-600">Completed Projects</span>
+          <span className="text-sm text-gray-700">Completed Projects</span>
         </div>
         <div className="flex items-center gap-2">
           <Image src="/map-pin-blue.svg" alt="Ongoing" width={16} height={16} />
-          <span className="text-sm text-gray-600">Ongoing Projects</span>
+          <span className="text-sm text-gray-700">Ongoing Projects</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center text-[10px] text-white font-medium">
+          <div className="w-4 h-4 rounded-full bg-green-600 flex items-center justify-center text-[10px] text-white font-medium">
             3
           </div>
-          <span className="text-sm text-gray-600">Multiple Projects</span>
+          <span className="text-sm text-gray-700">Multiple Projects</span>
         </div>
         <div className="pt-2 border-t border-gray-200">
-          <p className="text-xs text-gray-500">
-            Hold {navigator.platform.includes('Mac') ? '⌘ Command' : 'Ctrl'} to zoom with scroll
+          <p className="text-xs text-gray-600">
+            Hold {(() => {
+              // Check for macOS
+              if (navigator.platform.includes('Mac')) {
+                return '⌘ Command';
+              }
+              // Check for Windows
+              else if (navigator.platform.includes('Win')) {
+                return 'Ctrl';
+              }
+              // Linux and other platforms
+              else {
+                return 'Ctrl';
+              }
+            })()} to zoom with scroll
           </p>
         </div>
       </div>

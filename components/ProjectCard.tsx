@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { MapPin, Building2, Clock, CheckCircle2, Calendar, Target } from 'lucide-react'
+import { MapPin, Building2, Clock, CheckCircle2 } from 'lucide-react'
 import { Badge } from "@/components/ui/badge"
 
 interface ProjectCardProps {
@@ -8,9 +8,6 @@ interface ProjectCardProps {
   coordinates: [number, number]
   isOngoing?: boolean
   sector?: string
-  description?: string
-  duration?: string
-  impact?: string[]
 }
 
 export default function ProjectCard({ 
@@ -18,10 +15,7 @@ export default function ProjectCard({
   client, 
   coordinates, 
   isOngoing = false,
-  sector,
-  description,
-  duration,
-  impact
+  sector
 }: ProjectCardProps) {
   // Extract location from client string (assumes format "Company Name, Location")
   const location = client.split(', ').slice(1).join(', ')
@@ -52,16 +46,11 @@ export default function ProjectCard({
             </div>
           </div>
 
-          {/* Title and Description */}
+          {/* Title */}
           <div>
             <h3 className="text-sm font-semibold leading-snug text-gray-900 tracking-tight mb-2 group-hover:text-green-700 transition-colors">
               {title}
             </h3>
-            {description && (
-              <p className="text-sm text-gray-600 line-clamp-2">
-                {description}
-              </p>
-            )}
           </div>
 
           {/* Project Details */}
@@ -81,35 +70,14 @@ export default function ProjectCard({
                 {location}
               </p>
             </div>
-
-            {/* Duration */}
-            {duration && (
-              <div className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" />
-                <p className="text-xs text-gray-500">
-                  {duration}
-                </p>
-              </div>
-            )}
           </div>
 
-          {/* Sector and Impact */}
-          <div className="space-y-2">
+          {/* Sector */}
+          <div>
             {sector && (
               <Badge variant="outline" className="text-xs">
                 {sector}
               </Badge>
-            )}
-            
-            {impact && impact.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {impact.map((item, index) => (
-                  <div key={index} className="flex items-center gap-1 text-xs text-gray-600">
-                    <Target className="w-3 h-3 text-green-500" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
             )}
           </div>
         </div>

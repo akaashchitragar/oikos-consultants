@@ -24,43 +24,24 @@ import {
   Workflow
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import ServiceHero from '@/components/ServiceHero'
+import ServiceScheduleButton from '@/components/ServiceScheduleButton'
 
 export default function EcologicalRestorationContent() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/services/ecological-restoration.jpg"
-            alt="Ecological Restoration"
-            fill
-            className="object-cover"
-            priority
+      <ServiceHero 
+        title="Ecological Restoration Projects"
+        description="Revitalizing ecosystems through scientific restoration and sustainable management practices"
+        imageSrc="/images/services/ecological-restoration.jpg"
+        actionButton={
+          <ServiceScheduleButton 
+            serviceName="ecological-restoration-projects" 
+            className="mt-6"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <Link href="/services" className="inline-flex items-center text-white hover:text-emerald-400 transition-all duration-300 mb-6 hover:translate-x-[-4px] group">
-            <ArrowLeft className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:transform group-hover:translate-x-[-4px]" />
-            Back to Services
-          </Link>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Ecological Restoration Projects
-            </h1>
-            <p className="text-xl text-gray-200 mb-6">
-              Rehabilitating degraded ecosystems and promoting biodiversity through expert restoration services
-            </p>
-          </motion.div>
-        </div>
-      </section>
+        }
+      />
 
       {/* Main Content */}
       <section className="py-16 md:py-24">

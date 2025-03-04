@@ -22,9 +22,6 @@ interface Project {
   client: string
   coordinates: [number, number] // Tuple type for [longitude, latitude]
   sector?: string
-  description?: string
-  duration?: string
-  impact?: string[]
 }
 
 // Project data with coordinates and enhanced information
@@ -33,90 +30,103 @@ const completedProjects: Project[] = [
     title: "Socio-economic and agro-biodiversity mapping as part of conservation mapping exercise of Little Rann of Kachchh landscape in Gujarat",
     client: "Gujarat Ecological Education Research (GEER) Foundation, Gandhinagar, Gujarat",
     coordinates: [70.57, 23.31],
-    sector: "Biodiversity Conservation",
-    description: "Comprehensive mapping of socio-economic factors and agricultural biodiversity in the unique landscape of Little Rann of Kachchh.",
-    duration: "12 months",
-    impact: ["Mapped 500+ species", "Covered 5000 sq km area", "Benefited 50+ local communities"]
+    sector: "Biodiversity Conservation"
   },
   {
     title: "Mid-term assessment of crown cover, grass cover and tree regeneration in Gujarat Forest Development Project Area",
     client: "Gujarat Forestry Research Foundation, Gandhinagar, Gujarat",
     coordinates: [72.68, 23.23], // Gandhinagar
+    sector: "Forestry"
   },
   {
     title: "Assessment of biomass production, wood use and carbon sequestration in Prosopis juliflora shrublands in Bhavnagar and Bharuch Districts, Gujarat",
     client: "Gujarat Forestry Research Foundation, Gandhinagar, Gujarat",
     coordinates: [72.15, 21.71], // Bharuch
+    sector: "Carbon Sequestration"
   },
   {
     title: "Study on change in wood use pattern in Rural Gujarat",
     client: "Gujarat Forestry Research Foundation, Gandhinagar, Gujarat",
     coordinates: [72.68, 23.23], // Gandhinagar
+    sector: "Forestry"
   },
   {
     title: "Survey of Standing Stock in GFDP Intervention Areas at Ex Ante Period",
     client: "Gujarat Forestry Research Foundation, Gandhinagar, Gujarat",
     coordinates: [72.68, 23.23], // Gandhinagar
+    sector: "Forestry"
   },
   {
     title: "Assessment of Elephant movement along the proposed Govindpur - Sahebganj highway in Jharkhand to suggest appropriate mitigation measures",
     client: "Road Construction Department, Ranchi, Jharkhand and Department of Forest, Environment & Climate Change, Government of Jharkhand",
     coordinates: [85.33, 23.35], // Ranchi
+    sector: "Wildlife Conservation"
   },
   {
     title: "Biodiversity assessment and conservation plan for proposed Iron Ore mining area at Halmuri Hill Range at Dhanurajanpur Tehsil, Kanker District, Chattisgarh",
     client: "Ind Synergy Pvt. Ltd., Chattisgarh",
     coordinates: [81.49, 20.27], // Kanker
+    sector: "Biodiversity Conservation"
   },
   {
     title: "Regional Environment Impact Assessment (EIA) study & preparation of Environment Management Plan (EMP) for Dholera Special Investment Region (DSIR): Socio-Economic Baseline",
     client: "Gujarat Infrastructure Development Board (GIDB), Gandhinagar, Gujarat",
     coordinates: [72.19, 22.24], // Dholera
+    sector: "Environmental Impact Assessment"
   },
   {
     title: "Assessment of carbon sequestration & charcoal conversion in Prosopis juliflora shrublands in Kachchh District (Gujarat)",
     client: "Gujarat Forestry Research Foundation, Gandhinagar, Gujarat",
     coordinates: [70.57, 23.31], // Kachchh
+    sector: "Carbon Sequestration"
   },
   {
     title: "Construction of proposed Jetties of EBTL in Salaya Creek: Assessment of social, economical and livelihood aspects of local fishing communities",
     client: "Essar Bulk Terminal (Salaya) Limited, Ahmedabad, Gujarat",
     coordinates: [69.60, 22.31], // Salaya
+    sector: "Social Impact Assessment"
   },
   {
     title: "Assessment of impacts of proposed 400kV D/C power transmission lines by PGCIL on the biodiversity of Wild Ass Sanctuary",
     client: "Power Grid Corporation of India Limited, Vadodara, Gujarat",
     coordinates: [72.93, 22.30], // Vadodara
+    sector: "Biodiversity Conservation"
   },
   {
     title: "Assessment of impact of salt pan of Kanoria Chemicals Ltd. on biodiversity values of Wild Ass Sanctuary",
     client: "Kanoria Chemicals and Industries Limited, Gujarat",
     coordinates: [71.57, 23.31], // Wild Ass Sanctuary
+    sector: "Biodiversity Conservation"
   },
   {
     title: 'Formulation of "Site-specific wildlife conservation and management plan for Schedule-1 Species" for Devadari Iron Ore Mines of KIOCL',
     client: "KIOCL Limited, Sandur, Karnataka",
     coordinates: [76.54, 15.08], // Sandur
+    sector: "Wildlife Conservation"
   },
   {
     title: "Formulation of Site-specific wildlife conservation and management plan for Schedule-1 Species under Wildlife (Protection) Act for 6 MTPA integrated steel plant and captive power plant of UGFL",
     client: "Uttam Galva Ferrous Ltd. (UGFL), Mumbai",
     coordinates: [72.88, 19.08], // Mumbai
+    sector: "Wildlife Conservation"
   },
   {
     title: "Biodiversity survey of Makardhokra - 1 Opencast Coal mine (Phase-1)",
     client: "Western Coalfields Ltd., Nagpur, Maharashtra",
     coordinates: [79.08, 21.15], // Nagpur
+    sector: "Biodiversity Conservation"
   },
   {
     title: 'Formulation of "Site-specific wildlife conservation and management plan for Schedule-1 Species" for Steel and Power Plant',
     client: "Minera Steel & Power Private Limited, Ballari, Karnataka",
     coordinates: [76.92, 15.14], // Ballari
+    sector: "Wildlife Conservation"
   },
   {
     title: 'Formulation of "Site-specific wildlife conservation and management plan for Schedule-1 Species" for Metal and Ferro Alloy Plant of SMIORE',
     client: "The Sandur Manganese & Iron Ores (SMIORE) Limited, Vijayunagara, Karnataka",
     coordinates: [76.54, 15.08], // Sandur/Vijayunagara
+    sector: "Wildlife Conservation"
   },
 ];
 
@@ -125,43 +135,37 @@ const ongoingProjects: Project[] = [
     title: 'Formulation of "Site-specific wildlife conservation and management plan for Schedule-1 Species" for power transmission line',
     client: "Resources Pellets Concentrates Pvt. Ltd., Ballari, Karnataka",
     coordinates: [76.92, 15.14], // Ballari
-    sector: "Wildlife Conservation",
-    description: "Development of comprehensive wildlife conservation plan for power transmission infrastructure"
+    sector: "Wildlife Conservation"
   },
   {
     title: 'Formulation of "Soil moisture conservation plan" for power transmission line',
     client: "Resources Pellets Concentrates Pvt. Ltd., Ballari, Karnataka",
     coordinates: [76.92, 15.14], // Ballari
-    sector: "Environmental Conservation",
-    description: "Soil conservation planning for power transmission infrastructure"
+    sector: "Environmental Conservation"
   },
   {
     title: 'Formulation of "Site-specific wildlife conservation and management plan for Schedule-1 Species" for water pipeline',
     client: "Resources Pellets Concentrates Pvt. Ltd., Ballari, Karnataka",
     coordinates: [76.92, 15.14], // Ballari
-    sector: "Wildlife Conservation",
-    description: "Wildlife conservation planning for water pipeline infrastructure"
+    sector: "Wildlife Conservation"
   },
   {
     title: 'Formulation of "Soil moisture conservation plan" for water pipeline',
     client: "Resources Pellets Concentrates Pvt. Ltd., Ballari, Karnataka",
     coordinates: [76.92, 15.14], // Ballari
-    sector: "Environmental Conservation",
-    description: "Soil conservation planning for water pipeline infrastructure"
+    sector: "Environmental Conservation"
   },
   {
     title: 'Formulation of "Site-specific wildlife conservation and management plan for Schedule-1 Species" for downhill pipe conveyor of BKG mines',
     client: "BKG Mining Pvt. Ltd., Ballari, Karnataka",
     coordinates: [76.92, 15.14], // Ballari
-    sector: "Wildlife Conservation",
-    description: "Wildlife conservation planning for mining infrastructure"
+    sector: "Wildlife Conservation"
   },
   {
     title: 'Formulation of "Soil moisture conservation plan" for downhill pipe conveyor of BKG mines',
     client: "BKG Mining Pvt. Ltd., Ballari, Karnataka",
     coordinates: [76.92, 15.14], // Ballari
-    sector: "Environmental Conservation",
-    description: "Soil conservation planning for mining infrastructure"
+    sector: "Environmental Conservation"
   },
 ];
 
@@ -199,7 +203,7 @@ const jsonLd = {
       ...completedProjects.map((project, index) => ({
         '@type': 'Project',
         name: project.title,
-        description: project.description || 'Environmental consulting project by Oikos Consultants',
+        description: 'Environmental consulting project by Oikos Consultants',
         provider: {
           '@type': 'Organization',
           name: 'Oikos Consultants'
@@ -222,7 +226,7 @@ const jsonLd = {
       ...ongoingProjects.map((project, index) => ({
         '@type': 'Project',
         name: project.title,
-        description: project.description || 'Environmental consulting project by Oikos Consultants',
+        description: 'Environmental consulting project by Oikos Consultants',
         provider: {
           '@type': 'Organization',
           name: 'Oikos Consultants'
@@ -256,7 +260,6 @@ export default function ProjectsPage() {
     .filter(project => {
       const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           project.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          project.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           project.sector?.toLowerCase().includes(searchQuery.toLowerCase())
       
       const matchesSector = selectedSector === 'all' || project.sector === selectedSector
@@ -275,7 +278,6 @@ export default function ProjectsPage() {
     .filter(project => {
       const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           project.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          project.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           project.sector?.toLowerCase().includes(searchQuery.toLowerCase())
       
       const matchesSector = selectedSector === 'all' || project.sector === selectedSector
@@ -304,22 +306,27 @@ export default function ProjectsPage() {
         
         <div className="w-full relative">
           {/* Hero Section with Enhanced Pattern Background */}
-          <section className="relative bg-gradient-to-br from-green-100 via-green-50/80 to-transparent pt-24 lg:pt-32 pb-16 lg:pb-20 overflow-hidden">
+          <section className="relative bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 pt-24 lg:pt-32 pb-16 lg:pb-20 overflow-hidden">
             {/* Enhanced layered background patterns */}
-            <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-[0.06]" />
-            <div className="absolute inset-0 bg-[radial-gradient(#3b8249_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.06]" />
-            <div className="absolute inset-0 bg-[linear-gradient(45deg,#3b8249_0.5px,transparent_0.5px)] [background-size:24px_24px] opacity-[0.04]" />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/20 to-white/90" />
+            <div className="absolute inset-0 bg-[radial-gradient(#a7f3d0_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.15]" />
+            <div className="absolute inset-0 bg-[linear-gradient(45deg,#6ee7b7_0.4px,transparent_0.4px)] [background-size:28px_28px] opacity-[0.08]" />
+            <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-teal-100/30 via-transparent to-transparent" />
+            <div className="absolute left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-white/90 to-transparent" />
+            
+            {/* Decorative elements */}
+            <div className="absolute top-20 right-[10%] w-64 h-64 bg-emerald-200/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-10 left-[5%] w-48 h-48 bg-green-200/20 rounded-full blur-2xl"></div>
+            <div className="absolute top-40 left-[15%] w-32 h-32 bg-teal-200/20 rounded-full blur-xl"></div>
             
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl relative">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-100/90 text-green-800 text-sm font-medium mb-6 backdrop-blur-sm shadow-sm hover:bg-green-200/90 hover:scale-105 hover:shadow-md transform transition-all duration-300 ease-in-out cursor-default group">
-                  <MapPin className="w-4 h-4 group-hover:animate-bounce" />
-                  <span className="bg-gradient-to-r from-green-800 to-green-600 bg-clip-text text-transparent">Pan-India Presence</span>
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-lg bg-green-600 text-white text-sm font-medium mb-6 shadow-md hover:bg-green-700 hover:scale-105 hover:shadow-lg transform transition-all duration-300 ease-in-out cursor-default group">
+                  <MapPin className="w-5 h-5 group-hover:animate-bounce" />
+                  <span className="font-semibold">Pan-India Presence</span>
                 </div>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-[1.1] tracking-tight">
-                  Our Impact Through
-                  <span className="bg-gradient-to-r from-green-600 via-green-700 to-green-800 bg-clip-text text-transparent block mt-2">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 tracking-tight">
+                  <span className="block leading-[1.1]">Our Impact Through</span>
+                  <span className="bg-gradient-to-r from-green-600 via-green-700 to-green-800 bg-clip-text text-transparent block mt-2 leading-[1.1]">
                     Environmental Projects
                   </span>
                 </h1>
@@ -336,38 +343,69 @@ export default function ProjectsPage() {
               </div>
 
               {/* Key Regions with Enhanced Design */}
-              <div className="mt-12 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <div className="p-2 bg-green-50 rounded-xl">
-                        <MapPin className="w-5 h-5 text-green-600" />
+              <div className="mt-12 group relative overflow-hidden bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-green-600 hover:border-l-8 hover:-translate-y-1">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-green-100 rounded-bl-full opacity-60 group-hover:scale-110 group-hover:opacity-80 transition-all duration-300"></div>
+                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-green-50 rounded-tr-full opacity-60 group-hover:scale-110 group-hover:opacity-80 transition-all duration-300"></div>
+                
+                <div className="relative p-6">
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2.5 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors duration-300">
+                          <MapPin className="w-6 h-6 text-green-600 group-hover:text-green-700 group-hover:rotate-12 transition-all duration-300" />
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-green-800 transition-colors duration-300">Key Project Regions</h3>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900">Key Project Regions</h3>
+                      <p className="text-base text-gray-700 max-w-2xl leading-relaxed">
+                        Our environmental consultancy expertise spans across these key regions, each presenting unique ecological challenges and opportunities for sustainable development.
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-600 max-w-2xl leading-relaxed">
-                      Our environmental consultancy expertise spans across these key regions, each presenting unique ecological challenges and opportunities for sustainable development.
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {Array.from(new Set(projectLocations.map(p => {
-                      const location = p.client.split(', ').pop();
-                      return location?.includes('Gujarat') ? 'Gujarat' :
-                             location?.includes('Karnataka') ? 'Karnataka' :
-                             location?.includes('Maharashtra') ? 'Maharashtra' :
-                             location?.includes('Jharkhand') ? 'Jharkhand' :
-                             location?.includes('Chattisgarh') ? 'Chattisgarh' : null;
-                    })))
-                    .filter(Boolean)
-                    .map((state, index) => (
-                      <Badge 
-                        key={index} 
-                        variant="outline" 
-                        className="px-4 py-2 text-sm bg-white hover:bg-green-50 transition-colors border-green-100 text-green-800 hover:scale-105 transform duration-200 hover:shadow-md"
-                      >
-                        {state}
-                      </Badge>
-                    ))}
+                    <div className="flex flex-col justify-center mt-4 md:mt-0">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        {(() => {
+                          // Get unique states from project locations
+                          const states = Array.from(new Set(projectLocations.map(p => {
+                            const location = p.client.split(', ').pop();
+                            return location?.includes('Gujarat') ? 'Gujarat' :
+                                   location?.includes('Karnataka') ? 'Karnataka' :
+                                   location?.includes('Maharashtra') ? 'Maharashtra' :
+                                   location?.includes('Jharkhand') ? 'Jharkhand' :
+                                   location?.includes('Chattisgarh') ? 'Chattisgarh' : null;
+                          }))).filter(Boolean) as string[];
+                          
+                          // Define preferred order
+                          const orderedStates = ['Gujarat', 'Maharashtra', 'Karnataka', 'Jharkhand', 'Chattisgarh'];
+                          
+                          // Sort states according to preferred order
+                          const sortedStates = [...states].sort((a, b) => {
+                            return orderedStates.indexOf(a) - orderedStates.indexOf(b);
+                          });
+                          
+                          // Return the badges in the sorted order
+                          return sortedStates.map((state, index) => {
+                            // Assign a unique color variant based on index
+                            const colorVariants = [
+                              'bg-white hover:bg-green-100 border-green-200 text-green-800 hover:text-green-900',
+                              'bg-white hover:bg-emerald-100 border-emerald-200 text-emerald-800 hover:text-emerald-900',
+                              'bg-white hover:bg-teal-100 border-teal-200 text-teal-800 hover:text-teal-900',
+                              'bg-white hover:bg-lime-100 border-lime-200 text-lime-800 hover:text-lime-900',
+                              'bg-white hover:bg-green-100 border-green-200 text-green-800 hover:text-green-900',
+                            ];
+                            
+                            return (
+                              <Badge 
+                                key={index} 
+                                variant="outline" 
+                                className={`px-4 py-2.5 text-sm font-medium ${colorVariants[index % colorVariants.length]} transition-all duration-300 hover:scale-105 transform hover:shadow-md flex items-center justify-center`}
+                              >
+                                <span className="inline-block w-2 h-2 rounded-full bg-current mr-2 opacity-70"></span>
+                                {state}
+                              </Badge>
+                            );
+                          });
+                        })()}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

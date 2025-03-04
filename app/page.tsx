@@ -67,18 +67,36 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/Hero-banner.jpeg"
-            alt="Hero Background"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+      <section className="relative h-screen flex items-center overflow-hidden bg-white">
+        {/* Add subtle gradient background similar to other sections */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#F8FAF9] via-white to-[#F8FAF9]" />
+        
+        {/* Add decorative pattern element similar to other sections */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-[#2E7D32]/5 via-[#2E7D32]/3 to-[#2E7D32]/5 rounded-l-[100px] transform translate-x-1/3 overflow-hidden backdrop-blur-[1px]">
+          {/* Pattern Container */}
+          <div className="absolute inset-0">
+            {/* Subtle Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-t from-white/40 to-transparent mix-blend-soft-light" />
+            
+            {/* Enhanced Dots Pattern */}
+            <div className="absolute inset-0">
+              {/* Larger dots */}
+              <div className="absolute inset-0 grid grid-cols-12 gap-8 opacity-[0.08]">
+                {Array.from({ length: 144 }).map((_, index) => (
+                  <div key={`hero-dot-${index}`} className="w-1 h-1 rounded-full bg-[#2E7D32] drop-shadow-[0_0_1px_rgba(46,125,50,0.1)]" />
+                ))}
+              </div>
+              {/* Smaller dots for added depth */}
+              <div className="absolute inset-0 grid grid-cols-[repeat(24,1fr)] gap-4 opacity-[0.05]">
+                {Array.from({ length: 288 }).map((_, index) => (
+                  <div key={`hero-small-${index}`} className="w-0.5 h-0.5 rounded-full bg-[#2E7D32]" />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -93,7 +111,7 @@ export default function Home() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
               >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#1A1C1B] leading-tight tracking-tight">
                   <motion.div 
                     className="flex flex-col gap-2"
                     initial={{ opacity: 0 }}
@@ -104,13 +122,13 @@ export default function Home() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: 0.3 }}
-                      className="text-white"
+                      className="text-[#1A1C1B]"
                     >
                       {headingVariants[currentHeading].line1}
                     </motion.span>
                     <div className="flex flex-col gap-1">
                       <motion.span 
-                        className="text-4xl md:text-5xl lg:text-6xl text-[#A8C6A1] font-medium"
+                        className="text-4xl md:text-5xl lg:text-6xl text-[#2E7D32] font-medium"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
@@ -118,7 +136,7 @@ export default function Home() {
                         {headingVariants[currentHeading].line2}
                       </motion.span>
                       <motion.span 
-                        className="text-5xl md:text-6xl lg:text-7xl text-[#A8C6A1] drop-shadow-lg"
+                        className="text-5xl md:text-6xl lg:text-7xl text-[#2E7D32]"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
@@ -129,7 +147,7 @@ export default function Home() {
                   </motion.div>
                 </h1>
                 <motion.p 
-                  className="text-lg md:text-xl lg:text-2xl mt-6 mb-8 text-neutral-100 max-w-xl font-light leading-relaxed drop-shadow"
+                  className="text-lg md:text-xl lg:text-2xl mt-6 mb-8 text-[#2C302E] max-w-xl font-light leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.6 }}
@@ -154,7 +172,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/services"
-                className="px-8 py-4 bg-white/15 hover:bg-white/25 rounded-full text-white font-semibold backdrop-blur-sm transition-all w-fit hover:scale-105 shadow-lg hover:shadow-xl border border-white/20 hover:border-white/30"
+                className="px-8 py-4 bg-[#2E7D32]/10 hover:bg-[#2E7D32]/20 rounded-full text-[#1B5E20] font-semibold transition-all w-fit hover:scale-105 shadow-lg hover:shadow-xl border border-[#2E7D32]/20 hover:border-[#2E7D32]/30"
               >
                 <span className="text-base">Explore Services</span>
               </Link>
@@ -222,7 +240,6 @@ export default function Home() {
                   <h2 className="text-5xl font-bold text-[#1A1C1B] mb-4">
                     Our <span className="text-[#2E7D32]">Mission</span>
                   </h2>
-                  <div className="absolute -left-4 top-0 h-full w-1 bg-gradient-to-b from-[#2E7D32]/0 via-[#2E7D32] to-[#2E7D32]/0" />
                 </div>
                 <p className="text-xl text-[#2C302E] max-w-xl leading-relaxed">
                   Pioneering sustainable practices and innovative environmental solutions for a better tomorrow.

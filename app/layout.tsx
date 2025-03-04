@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -6,46 +6,64 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import { Toaster } from "@/components/ui/toaster";
 import AccessibilityProvider from "./components/AccessibilityProvider";
+import Script from 'next/script'
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Oikos Consultants - Environmental Consulting & Sustainability Solutions",
-  description: "Leading environmental consulting firm specializing in BRSR compliance, sustainability solutions, biodiversity conservation, and ecological services across India.",
-  keywords: "environmental consulting, sustainability, BRSR compliance, biodiversity conservation, ecological services, GHG inventory, wildlife conservation",
-  authors: [{ name: "Akash Chitragar", url: "mailto:akash@webart4u.com" }],
+  title: {
+    template: "%s | Oikos Consultants",
+    default: "Oikos Consultants | Environmental Consulting & Sustainability Solutions",
+  },
+  description:
+    "Leading environmental consulting firm specializing in sustainability solutions, ecological services, and environmental compliance.",
+  keywords: [
+    "environmental consulting",
+    "sustainability",
+    "ecological services",
+    "BRSR compliance",
+    "biodiversity assessment",
+    "wildlife conservation",
+    "GHG inventorisation",
+    "ecological restoration",
+    "native species",
+  ],
+  authors: [{ name: "Oikos Consultants" }],
   creator: "Oikos Consultants",
   publisher: "Oikos Consultants",
   formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
+    email: true,
+    address: true,
+    telephone: true,
   },
   metadataBase: new URL('https://oikosconsultants.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Oikos Consultants - Environmental Consulting & Sustainability Solutions',
-    description: 'Leading environmental consulting firm specializing in BRSR compliance, sustainability solutions, biodiversity conservation, and ecological services across India.',
-    url: 'https://oikosconsultants.com',
-    siteName: 'Oikos Consultants',
+    type: "website",
+    locale: "en_US",
+    url: "https://oikosconsultants.com",
+    title: "Oikos Consultants | Environmental Consulting & Sustainability Solutions",
+    description: "Leading environmental consulting firm specializing in sustainability solutions, ecological services, and environmental compliance.",
+    siteName: "Oikos Consultants",
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: "https://oikosconsultants.com/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'Oikos Consultants - Environmental Solutions',
+        alt: "Oikos Consultants",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Oikos Consultants - Environmental Consulting & Sustainability Solutions',
-    description: 'Leading environmental consulting firm specializing in BRSR compliance, sustainability solutions, and ecological services.',
-    images: ['/images/twitter-image.jpg'],
+    card: "summary_large_image",
+    title: "Oikos Consultants | Environmental Consulting & Sustainability Solutions",
+    description: "Leading environmental consulting firm specializing in sustainability solutions, ecological services, and environmental compliance.",
+    images: ["https://oikosconsultants.com/images/twitter-image.jpg"],
+    creator: "@oikosconsultants",
   },
   robots: {
     index: true,
@@ -63,30 +81,39 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#2E7D32",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#2E7D32" />
         <meta name="color-scheme" content="light dark" />
       </head>
       <body className={inter.className}>
-        <AccessibilityProvider>
-          <BackToTop />
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <main id="main-content" className="flex-grow" tabIndex={-1}>
-              {children}
-            </main>
-            <Footer />
-          </div>
-          <Toaster />
-        </AccessibilityProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <AccessibilityProvider>
+            <BackToTop />
+            <div className="min-h-screen flex flex-col">
+              <Navbar />
+              <main id="main-content" className="flex-grow" tabIndex={-1}>
+                {children}
+              </main>
+              <Footer />
+            </div>
+            <Toaster />
+          </AccessibilityProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

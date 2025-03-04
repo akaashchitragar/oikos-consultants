@@ -40,10 +40,10 @@ const NavContent = memo(function NavContent({
 
   return (
     <>
-      <div className="flex">
+      <div className="flex ml-0 pl-0">
         <Link 
           href="/" 
-          className="flex-shrink-0 flex items-center relative group"
+          className="flex-shrink-0 flex items-center relative pl-0"
           aria-label="Home"
         >
           <div 
@@ -54,7 +54,6 @@ const NavContent = memo(function NavContent({
               transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)' 
             }}
           >
-            <div className="absolute inset-0 bg-green-500/10 rounded-lg scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <Image
               src="/main-logo.png"
               alt="Oikos Consultants Logo"
@@ -62,12 +61,11 @@ const NavContent = memo(function NavContent({
               sizes="180px"
               priority
               style={{ objectFit: 'contain' }}
-              className="transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </div>
         </Link>
       </div>
-      <div className="hidden md:flex items-center space-x-10">
+      <div className="hidden md:flex items-center space-x-8">
         {navLinks.map((link) => (
           <div 
             key={link.href}
@@ -81,9 +79,8 @@ const NavContent = memo(function NavContent({
             >
               <span className="relative">
                 {link.label}
-                <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#2E7D32] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
               </span>
-              {link.dropdown && (
+              {link.dropdown && link.label !== 'Our Services' && (
                 <ChevronDown 
                   size={14} 
                   className={`transform transition-transform duration-300 ${
@@ -99,7 +96,7 @@ const NavContent = memo(function NavContent({
                 aria-orientation="vertical"
                 aria-labelledby="menu-button"
               >
-                <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-lg border border-[#2E7D32]/10 overflow-hidden">
+                <div className="bg-white rounded-2xl shadow-lg border border-[#2E7D32]/10 overflow-hidden">
                   <div className="py-2">
                     {link.dropdown.map((item, idx) => (
                       <Link
@@ -131,7 +128,7 @@ const NavContent = memo(function NavContent({
         ))}
         <Link
           href="/contact"
-          className="relative px-5 py-2.5 bg-gradient-to-r from-[#2E7D32] to-[#1B5E20] text-white rounded-full font-medium transition-all duration-300 hover:-translate-y-0.5 text-[15px] ml-6 antialiased overflow-hidden group"
+          className="relative px-5 py-2.5 bg-gradient-to-r from-[#2E7D32] to-[#1B5E20] text-white rounded-full font-medium transition-all duration-300 hover:-translate-y-0.5 text-[15px] ml-4 antialiased overflow-hidden group"
         >
           <span className="relative z-10">Get In Touch</span>
           <div className="absolute inset-0 bg-gradient-to-r from-[#1B5E20] to-[#2E7D32] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -163,7 +160,7 @@ const MobileMenu = memo(function MobileMenu({
   return (
     <div 
       className={`
-        md:hidden fixed inset-x-0 top-[72px] bg-white/95 backdrop-blur-lg
+        md:hidden fixed inset-x-0 top-[65px] bg-white
         transition-all duration-500 ease-in-out border-b border-neutral-200
         ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}
       `}
@@ -183,7 +180,6 @@ const MobileMenu = memo(function MobileMenu({
                 >
                   <span className="relative">
                     {link.label}
-                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#2E7D32] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
                   </span>
                   <ChevronDown 
                     size={16} 
@@ -216,7 +212,6 @@ const MobileMenu = memo(function MobileMenu({
                         >
                           <span className="relative">
                             {item.label}
-                            <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#2E7D32] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
                           </span>
                         </Link>
                       </motion.div>
@@ -232,7 +227,6 @@ const MobileMenu = memo(function MobileMenu({
               >
                 <span className="relative">
                   {link.label}
-                  <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-[#2E7D32] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
                 </span>
               </Link>
             )}
@@ -288,33 +282,28 @@ export default function Navbar() {
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center">
       <div 
         style={{
-          width: '100%',
-          maxWidth: mounted && scrollProgress > 0 ? '900px' : '100%',
-          borderRadius: mounted ? `${scrollProgress * 9999}px` : '0px',
+          width: 'auto',
+          maxWidth: '850px',
+          borderRadius: '9999px',
           transform: mounted ? `scale(${1 - (scrollProgress * 0.05)})` : 'scale(1)',
           opacity: 1,
           transition: 'all 700ms cubic-bezier(0.4, 0, 0.2, 1)',
-          border: mounted && scrollProgress > 0 ? '1px solid rgba(255, 255, 255, 0.15)' : 'none',
-          background: mounted && scrollProgress > 0 ? 
-            'linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95))' : 
-            'rgba(255,255,255,0.9)',
-          backdropFilter: 'blur(8px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(8px) saturate(180%)',
-          boxShadow: mounted && scrollProgress > 0 ? 
-            '0 4px 30px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.1)' : 
-            '0 4px 30px rgba(0, 0, 0, 0.1)'
+          border: '1px solid rgba(0, 0, 0, 0.1)',
+          background: '#FFFFFF',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          paddingLeft: '0.5rem'
         }}
         className={`
-          w-full transform-gpu antialiased
+          transform-gpu antialiased
           transition-[transform,opacity] duration-700 ease-in-out
-          ${mounted && scrollProgress > 0 ? 'mx-0 mt-4' : 'mx-0'}
+          mt-4
         `}
       >
         <div className={`
-          px-12 mx-auto
+          px-4 pl-2 mx-auto
           transition-all duration-700 ease-in-out
         `}>
-          <div className="h-[72px] flex items-center justify-between max-w-[1400px] mx-auto">
+          <div className="h-[65px] flex items-center justify-between">
             <NavContent 
               mounted={mounted}
               scrollProgress={scrollProgress}
