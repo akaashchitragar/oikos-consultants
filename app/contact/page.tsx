@@ -76,7 +76,11 @@ export default function ContactPage() {
     setIsSubmitting(true)
     
     try {
-      const response = await fetch('/api/contact', {
+      // Use full URL to ensure it works in all environments
+      const apiUrl = `${window.location.origin}/api/contact`
+      console.log('Submitting form to:', apiUrl)
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +88,10 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       })
       
+      const responseData = await response.json()
+      
       if (response.ok) {
+        console.log('Form submission successful:', responseData)
         toast({
           title: "Message Sent Successfully!",
           description: (
@@ -124,9 +131,11 @@ export default function ContactPage() {
           message: ''
         })
       } else {
-        throw new Error('Failed to send message')
+        console.error('Form submission failed:', responseData)
+        throw new Error(responseData.error || 'Failed to send message')
       }
     } catch (error) {
+      console.error('Contact form error:', error)
       toast({
         title: "Error",
         description: "There was a problem sending your message. Please try again.",
