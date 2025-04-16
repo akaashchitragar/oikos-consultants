@@ -19,6 +19,7 @@
     "@types/leaflet": "^1.9.8",
     "@types/leaflet.markercluster": "^1.5.4",
     "@types/react-simple-maps": "^3.0.2",
+    "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.0",
     "d3-geo": "^3.1.0",
@@ -27,11 +28,11 @@
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
     "lucide-react": "^0.330.0",
-    "next": "^15.2.1",
+    "next": "^14.1.4",
     "next-themes": "^0.4.4",
-    "react": "^19.0.0",
+    "react": "^18.2.0",
     "react-countup": "^6.5.3",
-    "react-dom": "^19.0.0",
+    "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
     "react-leaflet": "^4.2.1",
     "react-simple-maps": "^1.0.0",
@@ -40,12 +41,13 @@
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
+    "@babel/traverse": "^7.26.9",
     "@types/node": "^20.11.17",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^15.2.1",
+    "eslint-config-next": "^14.1.4",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",
@@ -53,5 +55,11 @@
   },
   "engines": {
     "node": ">=18.17.0"
+  },
+  "overrides": {
+    "next-babel-traverse": ">=7.23.2"
+  },
+  "resolutions": {
+    "@babel/traverse": ">=7.23.2"
   }
 }
