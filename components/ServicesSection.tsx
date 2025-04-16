@@ -43,10 +43,10 @@ const services = [
     link: '/services/ecological-restoration'
   },
   {
-    title: 'Native Species',
-    badge: 'Conservation',
-    image: '/images/services/native-species.jpg',
-    link: '/services/native-species'
+    title: 'Forest Clearance Services',
+    badge: 'Regulatory',
+    image: '/images/services/forest-clearance.jpg',
+    link: '/services/forest-clearance-services'
   }
 ]
 

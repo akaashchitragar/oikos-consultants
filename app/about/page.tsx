@@ -106,15 +106,6 @@ export default function AboutPage() {
             <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
               Leading the way in environmental consulting and conservation for a sustainable future
             </p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-lg rounded-full">
-                Discover Our Mission
-              </Button>
-            </motion.div>
           </motion.div>
         </div>
       </div>

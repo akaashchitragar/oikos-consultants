@@ -112,6 +112,21 @@ const services = [
       'Ecological integration',
     ],
   },
+  {
+    title: 'Forest Clearance Services',
+    badge: 'Regulatory',
+    slug: 'forest-clearance-services',
+    image: '/images/services/forest-clearance.jpg',
+    icon: <TreePine className="w-6 h-6" />,
+    color: 'from-green-500/20 to-green-600/20',
+    description: 'Simplifying the complex process of obtaining forest clearances in compliance with MoEF&CC guidelines.',
+    features: [
+      'Forest clearance application preparation',
+      'Site survey & mapping',
+      'Environmental impact studies',
+      'Compensatory afforestation planning',
+    ],
+  },
 ]
 
 // Add animation keyframes using Framer Motion

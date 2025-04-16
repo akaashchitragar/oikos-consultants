@@ -3,7 +3,7 @@ import WildlifeConservationContent from './content'
 
 export const metadata: Metadata = {
   title: 'Wildlife Conservation | Oikos Consultants',
-  description: 'Expert wildlife conservation and planning services focused on protecting ecosystems and ensuring species survival through strategic interventions.',
+  description: 'Protecting biodiversity for the future through wildlife conservation. We identify key habitats, assess impacts, and develop strategies to create wildlife-friendly landscapes that support thriving ecosystems.',
 }
 
 export default function WildlifeConservationPage() {

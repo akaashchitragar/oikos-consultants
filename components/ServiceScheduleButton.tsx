@@ -9,7 +9,8 @@ interface ServiceScheduleButtonProps {
                'wildlife-conservation-and-planning' | 
                'greenhouse-gas-ghg-inventorisation' | 
                'ecological-restoration-projects' | 
-               'promotion-of-native-species' |
+               'ecological-restoration' |
+               'forest-clearance-services' |
                'schedule-a-meeting'
   className?: string
 }
@@ -25,7 +26,8 @@ export default function ServiceScheduleButton({ serviceName, className }: Servic
     'wildlife-conservation-and-planning': 'Schedule Conservation Consultation',
     'greenhouse-gas-ghg-inventorisation': 'Schedule GHG Consultation',
     'ecological-restoration-projects': 'Schedule Restoration Consultation',
-    'promotion-of-native-species': 'Schedule Native Species Consultation',
+    'ecological-restoration': 'Schedule Restoration Consultation',
+    'forest-clearance-services': 'Schedule Clearance Consultation',
     'schedule-a-meeting': 'Schedule A Meeting'
   }
   

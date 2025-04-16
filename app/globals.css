@@ -73,10 +73,46 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  input, textarea, button, select {
+    font-family: inherit;
+    font-size: 100%;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 @layer utilities {
-  /* Existing styles if any */
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .safe-padding-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .safe-padding-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+  .safe-padding-left {
+    padding-left: env(safe-area-inset-left, 0);
+  }
+  .safe-padding-right {
+    padding-right: env(safe-area-inset-right, 0);
+  }
 }
 
 @keyframes float {

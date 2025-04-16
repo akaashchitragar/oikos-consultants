@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import BRSRComplianceContent from './content'
 
 export const metadata: Metadata = {
-  title: 'BRSR Compliance | Oikos Consultants',
-  description: 'Expert guidance in aligning with SEBI mandated Business Responsibility and Sustainability Reporting (BRSR) framework through comprehensive training and implementation support.',
+  title: 'BRSR Compliance & Reporting | Oikos Consultants',
+  description: 'Meet SEBI\'s Business Responsibility and Sustainability Reporting requirements with strategic insight. Enhance transparency, accountability, and long-term business resilience through effective ESG disclosure.',
 }
 
 export default function BRSRCompliancePage() {

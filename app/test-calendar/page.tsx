@@ -39,8 +39,8 @@ export default function TestCalendarPage() {
         </div>
         
         <div className="p-6 border rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Native Species</h2>
-          <ServiceScheduleButton serviceName="promotion-of-native-species" />
+          <h2 className="text-xl font-semibold mb-4">Forest Clearance Services</h2>
+          <ServiceScheduleButton serviceName="forest-clearance-services" />
         </div>
         
         <div className="p-6 border rounded-lg">

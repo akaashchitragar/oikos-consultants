@@ -3,7 +3,7 @@ import BiodiversityAssessmentContent from './content'
 
 export const metadata: Metadata = {
   title: 'Biodiversity Assessment | Oikos Consultants',
-  description: 'Comprehensive biodiversity surveys and impact assessments for understanding and protecting local ecosystems.',
+  description: 'Measure your impact on nature through our comprehensive biodiversity assessment services. Identify risks, opportunities, and pathways toward a nature-positive future.',
 }
 
 export default function BiodiversityAssessmentPage() {

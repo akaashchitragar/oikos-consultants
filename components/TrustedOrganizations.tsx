@@ -62,49 +62,49 @@ export default function TrustedOrganizations() {
   const allLogos = [...organizations, ...organizations, ...organizations];
 
   return (
-    <section className="py-10 bg-white">
+    <section className="py-8 sm:py-10 bg-white">
       <div className="container-fluid mx-auto px-4 max-w-[2000px]">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          className="text-center mb-6 sm:mb-8"
         >
           <motion.div 
             whileHover={{ y: -2 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             className="inline-block"
           >
-            <div className="px-4 py-1 bg-[#2E7D32]/5 backdrop-blur-sm border border-[#2E7D32]/20 rounded-full shadow-sm hover:shadow transition-all duration-300">
-              <div className="inline-flex items-center gap-2">
+            <div className="px-3 sm:px-4 py-1 bg-[#2E7D32]/5 backdrop-blur-sm border border-[#2E7D32]/20 rounded-full shadow-sm hover:shadow transition-all duration-300">
+              <div className="inline-flex items-center gap-1.5 sm:gap-2">
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.8 }}
                 >
-                  <Building2 className="w-4 h-4 text-[#2E7D32]" />
+                  <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2E7D32]" />
                 </motion.div>
-                <span className="text-[#2E7D32] text-sm font-medium">Our Partners</span>
+                <span className="text-[#2E7D32] text-xs sm:text-sm font-medium">Our Partners</span>
               </div>
             </div>
           </motion.div>
-          <h2 className="text-4xl font-bold mb-3 text-[#1A1C1B] mt-5">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-3 text-[#1A1C1B] mt-4 sm:mt-5">
             Our <span className="text-[#2E7D32]">Partners</span>
           </h2>
-          <p className="text-lg text-[#2C302E] max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[#2C302E] max-w-2xl mx-auto px-2">
             We are proud to partner with renowned companies and institutions committed to sustainability.
           </p>
         </motion.div>
 
         {/* Partners Scroll */}
-        <div className="relative w-full overflow-hidden py-8">
-          <div className="absolute left-0 top-8 bottom-8 w-32 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="absolute right-0 top-8 bottom-8 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+        <div className="relative w-full overflow-hidden py-6 sm:py-8">
+          <div className="absolute left-0 top-6 sm:top-8 bottom-6 sm:bottom-8 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute right-0 top-6 sm:top-8 bottom-6 sm:bottom-8 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10" />
           
           <div className="flex overflow-hidden">
             <div
               ref={containerRef}
-              className="flex gap-4 items-center py-6 px-4"
+              className="flex gap-3 sm:gap-4 items-center py-4 sm:py-6 px-2 sm:px-4"
               style={{
                 width: "max-content",
                 paddingLeft: '2rem',
@@ -116,11 +116,11 @@ export default function TrustedOrganizations() {
               {allLogos.map((org, index) => (
                 <div 
                   key={`${org.name}-${index}`}
-                  className="flex-shrink-0 w-[180px] h-[90px] relative bg-white rounded-lg shadow-md hover:shadow-xl p-4 group hover:-translate-y-1 border border-gray-100 hover:border-green-100 mx-1"
+                  className="flex-shrink-0 w-[140px] sm:w-[160px] md:w-[180px] h-[70px] sm:h-[80px] md:h-[90px] relative bg-white rounded-lg shadow-md hover:shadow-xl p-3 sm:p-4 group hover:-translate-y-1 border border-gray-100 hover:border-green-100 mx-1"
                   style={{ 
                     filter: 'grayscale(100%) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))',
                     transition: 'all 0.3s ease',
-                    margin: '8px'
+                    margin: '6px sm:8px'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.filter = 'grayscale(0%) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))';
@@ -134,8 +134,8 @@ export default function TrustedOrganizations() {
                     src={org.logo}
                     alt={org.name}
                     fill
-                    className="object-contain p-3 transition-transform duration-300 group-hover:scale-105"
-                    sizes="180px"
+                    className="object-contain p-2 sm:p-3 transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 640px) 140px, (max-width: 768px) 160px, 180px"
                   />
                 </div>
               ))}

@@ -19,7 +19,7 @@ const navLinks = [
       { href: '/services/wildlife-conservation', label: 'Wildlife Conservation' },
       { href: '/services/ghg-inventorisation', label: 'GHG Inventorisation' },
       { href: '/services/ecological-restoration', label: 'Ecological Restoration' },
-      { href: '/services/native-species', label: 'Native Species' },
+      { href: '/services/forest-clearance-services', label: 'Forest Clearance Services' },
     ]
   },
   { href: '/projects', label: 'Our Projects' },
