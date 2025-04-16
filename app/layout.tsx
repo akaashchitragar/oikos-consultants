@@ -9,6 +9,7 @@ import AccessibilityProvider from "./components/AccessibilityProvider";
 import Script from 'next/script'
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import Preloader from "./components/Preloader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -112,6 +113,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <AccessibilityProvider>
+            <Preloader />
             <BackToTop />
             <div className="min-h-screen flex flex-col">
               <Navbar />
